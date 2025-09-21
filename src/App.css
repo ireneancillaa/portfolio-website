@@ -32,9 +32,10 @@ body {
   font-weight: 400;
   overflow-x: hidden;
   position: relative;
-  background-color: #0f1217 !important;
+  background: linear-gradient(135deg, #020916, #11092b);
   color: #fff !important;
   font-family: 'regular', sans-serif !important;
+  min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -253,10 +254,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 .banner {
   margin-top: 0;
   padding: 160px 0 100px 0;
-  background-image: url('./assets/img/banner-bg.svg');
-  background-position: top center;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .banner .tagline {
@@ -337,7 +334,10 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
 }
 
 .skill-bx {
-  background: #121212;
+  background-image: url('./assets/img/banner-bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-radius: 60px;
   text-align: center;
   padding: 60px 50px;
@@ -368,25 +368,20 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   margin: 0 auto 15px auto;
 }
 
-.background-image-left {
-  top: 28%;
-  position: absolute;
-  bottom: 0;
-  width: 40%;
-  z-index: -4;
-}
-
 /* project */
 .project {
   padding: 80px 0;
   position: relative;
-  background-color: black;
+  text-align: center;
 }
 
 .project h2 {
-	font-size: 45px;
-	font-weight: 700;
+  font-size: 45px;
+  font-weight: 700;
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .project p {
@@ -398,68 +393,6 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   text-align: center;
   width: 56%;
 }
-
-/* .project .nav.nav-pills {
-  width: 72%;
-  margin: 0 auto;
-  border-radius: 50px;
-  background-color: rgb(255 255 255 / 10%);
-  overflow: hidden;
-}
-
-.project .nav.nav-pills .nav-item {
-  width: 33.33333%;
-}
-
-.project .nav.nav-pills .nav-link {
-  background-color: transparent;
-  border-radius: 0;
-  padding: 17px 0;
-  color: #fff;
-  width: 100%;
-  font-size: 17px;
-  letter-spacing: 0.8px;
-  font-weight: 500;
-  position: relative;
-  transition: 0.3s ease-in-out;
-  text-align: center;
-  z-index: 0;
-}
-
-.project .nav.nav-pills .nav-link::before {
-  content: "";
-  position: absolute;
-  width: 0;
-  height: 100%;
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: 0.3s ease-in-out;
-}
-
-.project .nav.nav-pills .nav-link.active::before {
-  width: 100% !important;
-}
-
-.project .nav.nav-pills .nav-link.active {
-  border: 1px solid rgba(255, 255, 255, 1);
-}
-
-.nav-link#projects-tabs-tab-first {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 55px 0px 0px 55px;
-}
-
-.nav-link#projects-tabs-tab-second {
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-}
-
-.nav-link#projects-tabs-tab-third {
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 0 55px 55px 0;
-} */
 
 .project .row {
   justify-content: center;
@@ -525,124 +458,175 @@ nav.navbar .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
   z-index: -4;
 }
 
-/* contact */
-.contact {
-  background: linear-gradient(90.21deg, #AA367C -5.91%, #4A2FBD 111.58%);
-  padding: 60px 0 200px 0;
-}
-.contact img {
-  width: 92%;
+/* footer */
+.bg-home {
+  background-position: top center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-.contact h2 {
-	font-size: 45px;
-	font-weight: 700;
-  margin-bottom: 30px;
-}
-
-.contact form input, .contact form textarea {
+.footer-content {
   width: 100%;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 20px;
-  color: #fff;
-  margin: 0 0 8px 0;
-  padding: 18px 26px;
-  font-weight: 500;
-  font-size: 18px;
-  letter-spacing: 0.8px;
-  transition: 0.3s ease-in-out;
-}
-
-.contact form input:focus, .contact form textarea:focus {
-  background: rgba(255, 255, 255, 1);
-  color: #121212;
-}
-
-.contact form input::placeholder, .contact form textarea::placeholder {
-  font-size: 16px;
-  font-weight: 400;
-  color: #fff;
-}
-
-.contact form input:focus::placeholder, .contact form textarea:focus::placeholder {
-  color: #121212;
-  opacity: 0.8;
-}
-
-.contact form button {
-  font-weight: 700;
-  color: #000;
-  background-color: #fff;
-  padding: 14px 48px;
-  font-size: 18px;
-  margin-top: 25px;
-  border-radius: 0;
-  position: relative;
-  transition: 0.3s ease-in-out;
-}
-
-.contact form button span {
-  z-index: 1;
-  position: relative;
-}
-
-.contact form button:hover {
-  color: #fff;
-}
-
-.contact form button::before {
-  content: "";
-  background: #121212;
-  width: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
-  transition: 0.3s ease-in-out;
-}
-
-.contact form button:hover::before {
-  width: 100%;
-}
-
-
-.App {
   text-align: center;
+  padding: 20px 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.footer-divider {
+  border-top: 1px solid gray;
+  margin: 10px 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+.footer-text {
+  color: #fff;
+  margin: 10px 0;
+}
+
+/* responsive */
+@media (max-width: 1024px) {
+  .banner h1 {
+    font-size: 48px;
+  }
+  .project p {
+    width: 80%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@media (max-width: 768px) {
+  nav.navbar .navbar-nav .nav-link.navbar-link {
+    padding: 0 15px;
+    font-size: 16px;
+  }
+  .banner {
+    padding: 120px 0 60px 0;
+    text-align: center;
+  }
+  .banner h1 {
+    font-size: 36px;
+  }
+  .banner p {
+    width: 100%;
+    font-size: 16px;
+  }
+  .skill h2, .project h2 {
+    font-size: 32px;
+  }
+  .skill-bx {
+    margin-top: 5px;
+  }
+  .project p {
+    width: 90%;
+  }
+  .banner img {
+    display: none;
+  }
+  .offcanvas-nav {
+    position: static;
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    flex-direction: row;
+    transition: none;
+    right: 0 !important;
+  }
+  .offcanvas-nav ul {
+    flex-direction: row;
+    justify-content: flex-start;
+  }
+  .offcanvas-nav ul li {
+    margin: 0 15px;
+  }
+  .offcanvas-nav ul li a {
+    font-size: 16px;
+    color: inherit;
+  }
+}
+
+@media (max-width: 480px) {
+  nav.navbar a.navbar-brand {
+    width: 20%;
+  }
+  .banner h1 {
+    font-size: 28px;
+  }
+  .banner p {
+    font-size: 14px;
+  }
+  .skill-bx {
+    padding: 40px 20px;
+  }
+  .proj-txtx h4 {
+    font-size: 20px;
+  }
+  .proj-txtx span {
+    font-size: 12px;
+  }
+  .banner img {
+    display: none;
+  }
+}
+
+/* responsive navbar offcanvas */
+.offcanvas-nav {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 250px;
+  height: 100vh;
+  background-color: #0f1217;
+  transition: right 0.3s ease-in-out;
+  padding: 60px 20px 20px 20px;
+  z-index: 99999;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.offcanvas-nav.active {
+  right: 0;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.offcanvas-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.offcanvas-nav ul li {
+  margin: 20px 0;
+}
+
+.offcanvas-nav ul li a {
+  color: #fff;
+  font-size: 18px;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.offcanvas-nav ul li a:hover {
+  color: #836DD0;
+}
+
+.offcanvas-nav .close-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0;
+}
+
+.navbar-icon {
+  font-size: 28px;
+  color: #fff; /* biar kontras dengan background */
+  cursor: pointer;
+  margin-right: auto;
 }

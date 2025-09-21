@@ -3,7 +3,6 @@ import Carousel from 'react-multi-carousel'
 import 'react-multi-carousel/lib/styles.css'
 import bar1 from '../assets/img/bar1.svg'
 import bar2 from '../assets/img/bar2.svg'
-import colorSharp from '../assets/img/color-sharp.svg'
 
 export const Skills = () => {
     const responsive = {
@@ -79,7 +78,6 @@ export const Skills = () => {
                     </Col>
                 </Row>
             </Container>
-            <img className="background-image-left" src={colorSharp} alt='background-left'/>
         </section>
     )
 }
