@@ -31,36 +31,38 @@ export const NavBar = () => {
   }, [])
 
   const onUpdateActiveLink = (value) => setActiveLink(value)
-  const toggleMenu = () => setIsOpen(!isOpen)
+  const toggleMenu = () => {
+    setIsOpen(prev => !prev)
+  }
+  const closeMenu = () => setIsOpen(false)
 
   return (
     <Navbar
       expand="lg"
       className={scrolled ? 'scrolled' : ''}
-      expanded={isOpen}
       fixed="top"
     >
       <Container>
-        {!isMobile && (
-          <Navbar.Brand href="#home">
-            <img src={logo} alt="Logo" />
-          </Navbar.Brand>
+        <Navbar.Brand href="#home">
+          <img src={logo} alt="Logo" />
+        </Navbar.Brand>
+
+        {isMobile && (
+          <Navbar.Toggle
+            aria-controls="basic-navbar-nav"
+            onClick={toggleMenu}
+            className="custom-toggler"
+          >
+            <span className="navbar-icon">&#9776;</span>
+          </Navbar.Toggle>
         )}
 
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
-          onClick={toggleMenu}
-          className="custom-toggler"
-        >
-          {isOpen ? <span className="navbar-icon">&times;</span> : <span className="navbar-icon">&#9776;</span>}
-        </Navbar.Toggle>
-
-        <Navbar.Collapse
+        <div
           id="basic-navbar-nav"
-          className={`offcanvas-nav ${isOpen ? 'active' : ''}`}
+          className={isMobile ? `offcanvas-nav ${isOpen ? 'active' : ''}` : 'navbar-collapse'}
         >
           {isOpen && isMobile && (
-            <button className="close-btn" onClick={toggleMenu}>
+            <button className="close-btn" onClick={closeMenu}>
               &times;
             </button>
           )}
@@ -68,21 +70,30 @@ export const NavBar = () => {
             <Nav.Link
               href="#home"
               className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('home')}
+              onClick={() => {
+                onUpdateActiveLink('home')
+                if (isMobile) closeMenu()
+              }}
             >
               Home
             </Nav.Link>
             <Nav.Link
               href="#skill"
               className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('skills')}
+              onClick={() => {
+                onUpdateActiveLink('skills')
+                if (isMobile) closeMenu()
+              }}
             >
               Skills
             </Nav.Link>
             <Nav.Link
               href="#project"
               className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => onUpdateActiveLink('projects')}
+              onClick={() => {
+                onUpdateActiveLink('projects')
+                if (isMobile) closeMenu()
+              }}
             >
               Projects
             </Nav.Link>
@@ -109,7 +120,7 @@ export const NavBar = () => {
               </button>
             </span>
           )}
-        </Navbar.Collapse>
+        </div>
       </Container>
     </Navbar>
   )
