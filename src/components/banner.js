@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import { Col, Container, Row } from "react-bootstrap"
 import { ArrowRightCircle } from "react-bootstrap-icons"
 import headerImg from '../assets/img/header-img.svg'
+import cv from '../src/assets/file/Irene Ancilla Chow-resume.pdf'
 
 export const Banner = () => {
     const [loopNum, setLoopNum] = useState(0)
@@ -54,10 +55,12 @@ export const Banner = () => {
                             {text}
                         </span>
                         <p>
-                            I am a highly motivated Mobile Application and Technology student with a strong passion for learning, teamwork, and innovation. I have been actively involved in various organizational activities, where I developed skills in communication, leadership, and event coordination. I am eager to contribute to impactful projects and grow in a dynamic tech environment.
+                            I am a highly motivated student of Mobile Application and Technology with a strong passion for mobile development, web programming, and UI/UX design. I enjoy turning ideas into user-friendly digital solutions while continuously sharpening my technical and creative skills. I thrive in dynamic environments that value teamwork, problem-solving, and innovation, and I am eager to contribute to impactful projects while growing as a versatile web and mobile developer.
                         </p>
-                        <button onClick={() => console.log('connect')}>
-                            Let's Connect 
+                        <button
+                            onClick={() => window.open(cv, "_blank")}
+                        >
+                            Let's Connect
                             <ArrowRightCircle size={25}/>
                         </button>
                     </Col>
