@@ -6,6 +6,7 @@ import github from '../assets/img/github.svg'
 import linkedin from '../assets/img/linkedin.svg'
 import instagram from '../assets/img/instagram.svg'
 import discord from '../assets/img/discord.svg'
+import cv from '../assets/file/resume.pdf'
 
 export const NavBar = () => {
   const [activeLink, setActiveLink] = useState('home')
@@ -115,7 +116,7 @@ export const NavBar = () => {
                   <img src={discord} alt="" />
                 </a>
               </div>
-              <button className="vvd" onClick={() => console.log('connect')}>
+              <button className="vvd" onClick={() => window.open(cv, "_blank")}>
                 <span>Let's Connect</span>
               </button>
             </span>
