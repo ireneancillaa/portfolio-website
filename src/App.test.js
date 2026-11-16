@@ -1,8 +1,8 @@
-import { render, screen } from '@testing-library/react';
-import App from './App';
+import { render, screen } from '@testing-library/react'
+import { Footer } from './components/footer'
 
-test('renders learn react link', () => {
-  render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test('renders Irene Ancilla in footer', () => {
+  render(<Footer />)
+  const elements = screen.getAllByText(/Irene Ancilla/i)
+  expect(elements.length).toBeGreaterThan(0)
+})

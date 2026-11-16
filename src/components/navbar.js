@@ -1,128 +1,271 @@
-import { useEffect, useState } from 'react'
-import { Navbar, Container, Nav } from 'react-bootstrap'
+import React, { useEffect, useState } from 'react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Links } from './links'
-import logo from '../assets/img/logo.svg'
 import github from '../assets/img/github.svg'
 import linkedin from '../assets/img/linkedin.svg'
-import instagram from '../assets/img/instagram.svg'
-import discord from '../assets/img/discord.svg'
-import cv from '../assets/file/resume.pdf'
+import cv from '../assets/file/Irene Ancilla Chow-resume.pdf'
 
-export const NavBar = () => {
-  const [activeLink, setActiveLink] = useState('home')
+export const NavBar = ({ onOpenConnect }) => {
+  const [activeSection, setActiveSection] = useState('home')
   const [scrolled, setScrolled] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const location = useLocation()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const onScroll = () => {
-      setScrolled(window.scrollY > 50)
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 40)
+
+      // Active section spy when on homepage
+      if (location.pathname === '/') {
+        const sections = ['home', 'projects', 'experience', 'skills']
+        const scrollPosition = window.scrollY + 200
+
+        for (const sectionId of sections) {
+          const el = document.getElementById(sectionId)
+          if (el) {
+            const top = el.offsetTop
+            const height = el.offsetHeight
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              setActiveSection(sectionId)
+              break
+            }
+          }
+        }
+      }
     }
 
-    const onResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [location])
 
-    window.addEventListener('scroll', onScroll)
-    window.addEventListener('resize', onResize)
-    return () => {
-      window.removeEventListener('scroll', onScroll)
-      window.removeEventListener('resize', onResize)
+  useEffect(() => {
+    if (location.pathname === '/projects') {
+      setActiveSection('projects')
+    } else if (location.pathname === '/experience') {
+      setActiveSection('experience')
+    } else if (location.pathname === '/') {
+      setActiveSection('home')
     }
-  }, [])
+  }, [location])
 
-  const onUpdateActiveLink = (value) => setActiveLink(value)
-  const toggleMenu = () => {
-    setIsOpen(prev => !prev)
+  const handleNavClick = (sectionId, route) => {
+    setIsMobileMenuOpen(false)
+    if (location.pathname === '/') {
+      const el = document.getElementById(sectionId)
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' })
+        setActiveSection(sectionId)
+      }
+    } else {
+      navigate(route || '/')
+      setTimeout(() => {
+        const el = document.getElementById(sectionId)
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth' })
+        }
+      }, 100)
+    }
   }
-  const closeMenu = () => setIsOpen(false)
 
   return (
-    <Navbar
-      expand="lg"
-      className={scrolled ? 'scrolled' : ''}
-      fixed="top"
-    >
-      <Container>
-        <Navbar.Brand href="#home">
-          <img src={logo} alt="Logo" />
-        </Navbar.Brand>
+    <>
+      <header className="macos-navbar-container">
+        <nav className={`macos-navbar-bar ${scrolled ? 'scrolled' : ''}`} aria-label="Main Navigation">
+          {/* Left Brand with Live Indicator */}
+          <div className="nav-brand-group">
+            <Link
+              to="/"
+              className="nav-brand-link"
+              onClick={() => handleNavClick('home', '/')}
+              aria-label="Irene Ancilla Chow - Home"
+            >
+              <div className="nav-brand-avatar">IAC</div>
+              <span className="nav-brand-name">Irene Ancilla Chow</span>
+            </Link>
+            <div className="nav-status-chip">
+              <span className="status-dot"></span>
+              <span>Available</span>
+            </div>
+          </div>
 
-        {isMobile && (
-          <Navbar.Toggle
-            aria-controls="basic-navbar-nav"
-            onClick={toggleMenu}
-            className="custom-toggler"
-          >
-            <span className="navbar-icon">&#9776;</span>
-          </Navbar.Toggle>
-        )}
-
-        <div
-          id="basic-navbar-nav"
-          className={isMobile ? `offcanvas-nav ${isOpen ? 'active' : ''}` : 'navbar-collapse'}
-        >
-          {isOpen && isMobile && (
-            <button className="close-btn" onClick={closeMenu}>
-              &times;
+          {/* Center App-like Segmented Control */}
+          <div className="nav-segmented-control" role="tablist" aria-label="Sections">
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'home'}
+              className={`segmented-pill-btn ${activeSection === 'home' ? 'active' : ''}`}
+              onClick={() => handleNavClick('home', '/')}
+            >
+              Overview
             </button>
-          )}
-          <Nav className="me-auto">
-            <Nav.Link
-              href="#home"
-              className={activeLink === 'home' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => {
-                onUpdateActiveLink('home')
-                if (isMobile) closeMenu()
-              }}
-            >
-              Home
-            </Nav.Link>
-            <Nav.Link
-              href="#skill"
-              className={activeLink === 'skills' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => {
-                onUpdateActiveLink('skills')
-                if (isMobile) closeMenu()
-              }}
-            >
-              Skills
-            </Nav.Link>
-            <Nav.Link
-              href="#project"
-              className={activeLink === 'projects' ? 'active navbar-link' : 'navbar-link'}
-              onClick={() => {
-                onUpdateActiveLink('projects')
-                if (isMobile) closeMenu()
-              }}
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'projects'}
+              className={`segmented-pill-btn ${activeSection === 'projects' ? 'active' : ''}`}
+              onClick={() => handleNavClick('projects', '/projects')}
             >
               Projects
-            </Nav.Link>
-          </Nav>
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'experience'}
+              className={`segmented-pill-btn ${activeSection === 'experience' ? 'active' : ''}`}
+              onClick={() => handleNavClick('experience', '/experience')}
+            >
+              Experience
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'skills'}
+              className={`segmented-pill-btn ${activeSection === 'skills' ? 'active' : ''}`}
+              onClick={() => handleNavClick('skills', '/')}
+            >
+              Stack
+            </button>
+          </div>
 
-          {!isMobile && (
-            <span className="navbar-text">
-              <div className="social-icon">
-                <a href={Links.github} target="_blank" rel="noopener noreferrer">
-                  <img src={github} alt="" />
-                </a>
-                <a href={Links.linkedin} target="_blank" rel="noopener noreferrer">
-                  <img src={linkedin} alt="" />
-                </a>
-                <a href={Links.instagram} target="_blank" rel="noopener noreferrer">
-                  <img src={instagram} alt="" />
-                </a>
-                <a href={Links.discord} target="_blank" rel="noopener noreferrer">
-                  <img src={discord} alt="" />
-                </a>
-              </div>
-              <button className="vvd" onClick={() => window.open(cv, "_blank")}>
-                <span>Let's Connect</span>
-              </button>
-            </span>
-          )}
+          {/* Right Action Buttons */}
+          <div className="nav-actions-group">
+            <a
+              href={Links.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-social-btn"
+              aria-label="GitHub Profile"
+            >
+              <img src={github} alt="GitHub" />
+            </a>
+            <a
+              href={Links.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-social-btn"
+              aria-label="LinkedIn Profile"
+            >
+              <img src={linkedin} alt="LinkedIn" />
+            </a>
+
+            <a
+              href={cv}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="nav-btn-resume"
+              aria-label="View Resume PDF"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+              </svg>
+              <span>Resume</span>
+            </a>
+
+            <button
+              type="button"
+              className="nav-btn-connect"
+              onClick={onOpenConnect}
+              aria-label="Open Connect Dialog"
+            >
+              <span>Connect</span>
+            </button>
+
+            {/* Mobile Hamburger Toggle */}
+            <button
+              type="button"
+              className="mobile-nav-toggle"
+              onClick={() => setIsMobileMenuOpen(true)}
+              aria-label="Open mobile navigation menu"
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+        </nav>
+      </header>
+
+      {/* Mobile Offcanvas Drawer */}
+      <div
+        className={`macos-mobile-drawer-overlay ${isMobileMenuOpen ? 'active' : ''}`}
+        onClick={() => setIsMobileMenuOpen(false)}
+        aria-hidden={!isMobileMenuOpen}
+      />
+      <div className={`macos-mobile-drawer ${isMobileMenuOpen ? 'active' : ''}`} role="dialog" aria-modal="true" aria-label="Mobile Navigation">
+        <div className="drawer-header">
+          <div className="nav-brand-group">
+            <div className="nav-brand-avatar">IAC</div>
+            <span className="nav-brand-name">Irene Ancilla Chow</span>
+          </div>
+          <button
+            type="button"
+            className="drawer-close-btn"
+            onClick={() => setIsMobileMenuOpen(false)}
+            aria-label="Close navigation"
+          >
+            &times;
+          </button>
         </div>
-      </Container>
-    </Navbar>
+
+        <nav className="drawer-links-list">
+          <button
+            type="button"
+            className={`drawer-nav-item ${activeSection === 'home' ? 'active' : ''}`}
+            onClick={() => handleNavClick('home', '/')}
+          >
+            Overview
+          </button>
+          <button
+            type="button"
+            className={`drawer-nav-item ${activeSection === 'projects' ? 'active' : ''}`}
+            onClick={() => handleNavClick('projects', '/projects')}
+          >
+            Projects
+          </button>
+          <button
+            type="button"
+            className={`drawer-nav-item ${activeSection === 'experience' ? 'active' : ''}`}
+            onClick={() => handleNavClick('experience', '/experience')}
+          >
+            Experience
+          </button>
+          <button
+            type="button"
+            className={`drawer-nav-item ${activeSection === 'skills' ? 'active' : ''}`}
+            onClick={() => handleNavClick('skills', '/')}
+          >
+            Stack & Skills
+          </button>
+        </nav>
+
+        <div className="drawer-footer-actions">
+          <a
+            href={cv}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-hero-secondary"
+            style={{ width: '100%', justifyContent: 'center' }}
+          >
+            View Resume (PDF)
+          </a>
+          <button
+            type="button"
+            className="btn-hero-primary"
+            style={{ width: '100%', justifyContent: 'center' }}
+            onClick={() => {
+              setIsMobileMenuOpen(false)
+              onOpenConnect()
+            }}
+          >
+            Let's Connect
+          </button>
+        </div>
+      </div>
+    </>
   )
 }

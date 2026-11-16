@@ -1,0 +1,42 @@
+.skill-circle-wrapper {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 20px auto;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.skill-circle-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.skill-circle-bg {
+  stroke: rgba(255, 255, 255, 0.1);
+}
+
+.skill-circle-progress {
+  stroke: url(#skillProgressGradient);
+  stroke-dashoffset: 439.82; /* Circumference of r=70 is ~439.82 */
+  transition: stroke-dashoffset 0.3s ease;
+}
+
+.skill-circle-progress.animate {
+  animation: skill-progress-anim 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+.skill-circle-text {
+  fill: #ffffff;
+  font-size: 26px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+@keyframes skill-progress-anim {
+  to {
+    stroke-dashoffset: var(--stroke-dashoffset);
+  }
+}

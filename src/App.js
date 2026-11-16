@@ -1,21 +1,86 @@
-import './App.css'
-import { NavBar } from './components/navbar'
-import { Banner } from './components/banner'
-import { Skills } from './components/skills'
-import { Projects } from './components/projects'
-import { Footer } from './components/footer'
+import React, { useState, useEffect, useRef } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './App.css'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { NavBar } from './components/navbar'
+import { Home } from './pages/Home'
+import { ProjectsPage } from './pages/ProjectsPage'
+import { ExperiencePage } from './pages/ExperiencePage'
+import { Footer } from './components/footer'
+import { ScrollToTop } from './components/ScrollToTop'
+import { ConnectModal } from './components/ConnectModal'
 
 function App() {
+  const [isConnectOpen, setIsConnectOpen] = useState(false)
+  const spotlightRef = useRef(null)
+
+  useEffect(() => {
+    const isFinePointer = window.matchMedia('(pointer: fine)').matches
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    if (!isFinePointer || prefersReducedMotion) return
+
+    let frameId = null
+    let latestX = -999
+    let latestY = -999
+
+    const updateSpotlight = () => {
+      frameId = null
+      if (!spotlightRef.current) return
+      spotlightRef.current.style.setProperty('--mouse-x', `${latestX}px`)
+      spotlightRef.current.style.setProperty('--mouse-y', `${latestY}px`)
+      spotlightRef.current.style.opacity = '1'
+    }
+
+    const handleMouseMove = (e) => {
+      latestX = e.clientX
+      latestY = e.clientY
+      if (!frameId) {
+        frameId = window.requestAnimationFrame(updateSpotlight)
+      }
+    }
+
+    const handleMouseLeave = () => {
+      if (spotlightRef.current) {
+        spotlightRef.current.style.opacity = '0'
+      }
+    }
+
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
+    document.addEventListener('mouseleave', handleMouseLeave)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseleave', handleMouseLeave)
+      if (frameId) window.cancelAnimationFrame(frameId)
+    }
+  }, [])
+
+  const handleOpenConnect = () => {
+    setIsConnectOpen(true)
+  }
+
+  const handleCloseConnect = () => {
+    setIsConnectOpen(false)
+  }
+
   return (
-    <div className="App">
-      <NavBar />
-      <Banner />
-      <Skills />
-      <Projects />
-      <Footer />
-    </div>
-  );
+    <Router>
+      <div className="App">
+        <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
+        <ScrollToTop />
+        <NavBar onOpenConnect={handleOpenConnect} />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home onOpenConnect={handleOpenConnect} />} />
+            <Route path="/projects" element={<ProjectsPage onOpenConnect={handleOpenConnect} />} />
+            <Route path="/experience" element={<ExperiencePage onOpenConnect={handleOpenConnect} />} />
+          </Routes>
+        </main>
+        <Footer onOpenConnect={handleOpenConnect} />
+        <ConnectModal isOpen={isConnectOpen} onClose={handleCloseConnect} />
+      </div>
+    </Router>
+  )
 }
 
-export default App;
+export default App
