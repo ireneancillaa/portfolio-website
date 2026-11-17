@@ -27,13 +27,23 @@ export const Experience = () => {
     },
     {
       id: 'sasc-mentor',
-      role: 'SASC Senior Mentor',
+      role: 'SASC Senior Mentor Scholarship',
       company: 'BINUS University (West Jakarta)',
       duration: 'Feb 2025 - Jan 2026',
+      badge: 'Part-time',
+      description:
+        'Selected for two consecutive SASC Mentor Scholarship periods (Even 2024/2025 & Senior Mentor Odd 2025/2026). Delivered structured one-on-one and group mentoring sessions to strengthen mentees study strategies, time management, organization, critical thinking, and self-directed learning while tracking progress through regular evaluation.',
+      tags: ['Academic Mentoring', '2 Periods', 'Study Strategies', 'Critical Thinking', 'Progress Evaluation']
+    },
+    {
+      id: 'beelingua-mentor',
+      role: 'Beelingua Mentor',
+      company: 'BINUS University (West Jakarta)',
+      duration: 'Apr 2025 - Dec 2025',
       badge: 'Mentorship',
       description:
-        'Mentored undergraduate students through one-on-one and group sessions, providing academic guidance and personal support. Helped mentees build study strategies, time management, and problem-solving skills in a motivating learning environment.',
-      tags: ['Academic Mentoring', 'Leadership', 'Time Management', 'Problem Solving', 'Communication']
+        'Assisted mentees in completing their Beelingua learning tasks and assignments. Provided guidance when mentees encountered difficulties, monitored progress, followed up on incomplete assignments, and maintained regular communication to keep learners engaged.',
+      tags: ['Language Mentoring', 'Student Support', 'Progress Monitoring', 'Communication']
     },
     {
       id: 'binus-square-ambassador',
@@ -44,6 +54,26 @@ export const Experience = () => {
       description:
         'Coordinated resident engagement programs and technology-focused events for Scientia. Organized community activities to strengthen collaboration and student engagement, while assisting with boarders concerns and daily housing operations.',
       tags: ['Event Coordination', 'Community Engagement', 'Teamwork', 'Housing Operations']
+    },
+    {
+      id: 'freshmen-partner-b28',
+      role: 'Freshmen Partner (FP) B28',
+      company: 'BINUS University (West Jakarta)',
+      duration: 'Sep 2024 - May 2025',
+      badge: 'Mentorship',
+      description:
+        'Provided consistent support and guidance to freshmen throughout the First Year Program (FYP). Assisted freshmen in overcoming academic challenges, developing time management and study strategies, and adjusting to university life.',
+      tags: ['First Year Program', 'Student Guidance', 'Community Building', 'Time Management']
+    },
+    {
+      id: 'freshmen-leader-b28',
+      role: 'Freshmen Leader (FL) B28',
+      company: 'BINUS University (West Jakarta)',
+      duration: 'Aug 2024 - Sep 2024',
+      badge: 'Leadership',
+      description:
+        'Guided and supported freshmen throughout the Orientation Program (OTP), Week of Welcoming (WOW), and Inauguration. Introduced campus resources, facilities, and key contacts while providing personalized advice on schedules and university transition.',
+      tags: ['Orientation Program', 'Peer Mentoring', 'Campus Engagement', 'Communication']
     }
   ]
 
@@ -51,42 +81,72 @@ export const Experience = () => {
     {
       id: 'kmk-gm',
       role: 'General Manager of Event Division',
-      company: 'Keluarga Mahasiswa Katolik (KMK)',
-      duration: 'Feb 2025 - Present',
+      company: 'Keluarga Mahasiswa Katolik BINUS University (West Jakarta)',
+      duration: 'Feb 2025 - Feb 2026',
       badge: 'Organisational Leadership',
       description:
-        'Managing regional operations and cross-regional teams to ensure alignment, quality, and productivity. Coordinating communication between leaders, committees, and management while mentoring coordinators and activists and designing cohesive weekly event themes.',
-      tags: ['Operations Management', 'Cross-Regional Leadership', 'Mentoring', 'Event Strategy']
+        'Oversaw operations across all regions, leading cross-regional teams and mentoring regional coordinators and activists. Developed the central theme for KMKJ (KMK Jumat) All Region, bridged communication between leaders and management, and prepared contingency plans for smooth weekly event execution.',
+      tags: ['Cross-Regional Leadership', 'Operations Management', 'Mentoring', 'Event Strategy']
     },
     {
       id: 'kmk-vice',
       role: 'Vice Coordinator of Event Division',
-      company: 'Keluarga Mahasiswa Katolik (KMK)',
-      duration: 'Feb 2025 - Present',
+      company: 'Keluarga Mahasiswa Katolik BINUS University (West Jakarta)',
+      duration: 'Feb 2025 - Feb 2026',
       badge: 'Organisational Leadership',
       description:
-        'Supporting event planning, execution, and evaluation in alignment with organizational goals. Leading and mentoring activist teams across task distribution, collaboration, and interactive activity concepts.',
-      tags: ['Event Planning', 'Team Leadership', 'Task Distribution', 'Community Impact']
+        'Assisted the Event Coordinator in planning, executing, and evaluating events aligned with organizational goals. Led event activist teams, managed task distribution and rotations for KMKJ weekly events, and collaborated across divisions on logistics and promotional strategies.',
+      tags: ['Event Planning', 'Team Leadership', 'Task Distribution', 'Cross-Division Collaboration']
+    },
+    {
+      id: 'kmk-innova-bench',
+      role: 'PIC of Innova Bench Eksternal 2025',
+      company: 'Keluarga Mahasiswa Katolik BINUS University',
+      duration: 'Jun 2025 - Oct 2025',
+      badge: 'Project Lead',
+      description:
+        'Coordinated the organizing team for the KMK BINUS x KMK UBL external benchmarking event. Developed the event concept and rundown, supervised scheduling, logistics, and technical preparations, and ensured strong inter-organizational knowledge sharing.',
+      tags: ['Project Management', 'Event Concept', 'Logistics', 'Inter-Organizational Relations']
+    },
+    {
+      id: 'kmk-easter-funding',
+      role: 'Funding Coordinator of Easter KMK 2025',
+      company: 'Keluarga Mahasiswa Katolik BINUS University',
+      duration: 'Feb 2025 - Apr 2025',
+      badge: 'Fundraising & Sponsorship',
+      description:
+        'Designed and executed fundraising strategies through internal initiatives and external collaborations. Negotiated with sponsors and partners for financial and in-kind support, maintained financial transparency, and exceeded the fundraising target by 10%.',
+      tags: ['Fundraising Strategy', 'Sponsorship Negotiation', 'Financial Accountability', 'Partner Relations']
     },
     {
       id: 'kmk-event-activist',
       role: 'Event Activist',
-      company: 'Keluarga Mahasiswa Katolik (KMK)',
+      company: 'Keluarga Mahasiswa Katolik BINUS University (West Jakarta)',
       duration: 'Feb 2024 - Feb 2025',
       badge: 'Event Operations',
       description:
-        'Organized structured rundowns for KMKJ events with contingency planning and time management. Designed engaging presentations to communicate event goals and led interactive ice-breaking sessions.',
-      tags: ['Event Rundowns', 'Time Management', 'Presentation Design', 'Facilitation']
+        'Planned and organized structured rundowns for KMKJ (KMK Jumat) with time-slot allocation and backup plans. Created engaging PowerPoint presentations to communicate event concepts and facilitated interactive ice-breaking sessions.',
+      tags: ['Communication', 'Leadership', 'Event Rundowns', 'Time Management', 'Facilitation']
     },
     {
       id: 'kmk-media-activist',
       role: 'Media and Communication Activist',
-      company: 'Keluarga Mahasiswa Katolik (KMK)',
+      company: 'Keluarga Mahasiswa Katolik BINUS University (West Jakarta)',
       duration: 'Feb 2024 - Feb 2025',
       badge: 'Media & Design',
       description:
-        'Designed cohesive Instagram feeds aligned with KMK branding and created event posters with clear messaging and engaging visual layouts.',
-      tags: ['Visual Branding', 'Social Media Design', 'Poster Design', 'Content Layout']
+        'Developed cohesive Instagram feeds aligned with KMK branding, typography, and layout consistency. Designed informative event posters with clear messaging, illustrations, and visual hierarchy to attract audience attention.',
+      tags: ['Canva', 'Graphic Design', 'Instagram Branding', 'Poster Design']
+    },
+    {
+      id: 'kmk-pmb-coord',
+      role: 'Event Coordinator of PMB (Penerimaan Mahasiswa Baru)',
+      company: 'Keluarga Mahasiswa Katolik BINUS University (West Jakarta)',
+      duration: 'Jul 2024 - Sep 2024',
+      badge: 'First Year Program',
+      description:
+        'Coordinated religious hours and the Week of Welcoming (WOW) party for incoming freshmen. Collaborated with team members on creative concepts, schedules, and on-site logistics to create a welcoming experience for new students.',
+      tags: ['Event Coordination', 'On-Site Operations', 'Team Collaboration', 'Freshmen Welcoming']
     }
   ]
 
