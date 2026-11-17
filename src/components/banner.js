@@ -121,7 +121,7 @@ export const Banner = ({ onOpenConnect }) => {
           </Col>
 
           {/* Astronaut Visual (Preserved & Elevated) */}
-          <Col lg={5} xl={5} className="mt-5 mt-lg-0">
+          <Col lg={5} xl={5} className="d-none d-lg-block">
             <div className="hero-astronaut-container">
               <div className="astronaut-ambient-glow"></div>
               <img

@@ -4,6 +4,8 @@ import { FiExternalLink, FiFolder, FiGitBranch, FiGitCommit, FiRefreshCw, FiStar
 import { Links } from './links'
 
 const GITHUB_USERNAME = 'ireneancillaa'
+const CACHE_KEY = `gh_stats_cache_${GITHUB_USERNAME}`
+const CACHE_TTL_MS = 30 * 60 * 1000 // 30 minutes to stay well under GitHub's 60 req/hr unauthenticated limit
 
 const LANGUAGE_COLORS = {
   Dart: '#38bdf8',
@@ -83,6 +85,25 @@ export const GitHubStats = () => {
 
   useEffect(() => {
     const controller = new AbortController()
+    const forceRefresh = reloadTick > 0
+
+    let cached = null
+    try {
+      const raw = localStorage.getItem(CACHE_KEY)
+      if (raw) cached = JSON.parse(raw)
+    } catch {
+      cached = null
+    }
+
+    if (!forceRefresh && cached && Date.now() - cached.savedAt < CACHE_TTL_MS) {
+      setProfile(cached.profile)
+      setRepos(cached.repos)
+      setLatestCommits(cached.latestCommits || {})
+      setContribData(cached.contribData || null)
+      setStatus(cached.repos?.length === 0 && !cached.profile?.public_repos ? 'empty' : 'ready')
+      return () => controller.abort()
+    }
+
     setStatus('loading')
 
     async function loadGitHub() {
@@ -138,15 +159,40 @@ export const GitHubStats = () => {
           })
         )
 
+        const commitsMap = Object.fromEntries(commitEntries)
+        const nextContrib = contribJson && Array.isArray(contribJson.contributions) ? contribJson : null
+
         setProfile(userData)
         setRepos(ownRepos)
-        setLatestCommits(Object.fromEntries(commitEntries))
-        if (contribJson && Array.isArray(contribJson.contributions)) {
-          setContribData(contribJson)
-        }
+        setLatestCommits(commitsMap)
+        if (nextContrib) setContribData(nextContrib)
         setStatus(ownRepos.length === 0 && !userData.public_repos ? 'empty' : 'ready')
+
+        try {
+          localStorage.setItem(
+            CACHE_KEY,
+            JSON.stringify({
+              savedAt: Date.now(),
+              profile: userData,
+              repos: ownRepos,
+              latestCommits: commitsMap,
+              contribData: nextContrib
+            })
+          )
+        } catch {
+          // Ignore storage quota errors
+        }
       } catch (err) {
         if (err.name === 'AbortError') return
+        // Fall back to last cached real data if rate-limited
+        if (cached?.profile && Array.isArray(cached?.repos)) {
+          setProfile(cached.profile)
+          setRepos(cached.repos)
+          setLatestCommits(cached.latestCommits || {})
+          setContribData(cached.contribData || null)
+          setStatus('ready')
+          return
+        }
         setStatus('error')
       }
     }

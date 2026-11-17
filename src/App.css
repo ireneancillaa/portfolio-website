@@ -2694,6 +2694,15 @@ button:focus-visible, a:focus-visible {
    Responsive Breakpoints
    ========================================================================== */
 
+@media (max-width: 1120px) {
+  .nav-status-chip {
+    display: none;
+  }
+  .macos-navbar-bar {
+    padding: 8px 12px 8px 14px;
+  }
+}
+
 @media (max-width: 1024px) {
   .hero-main-title {
     font-size: 44px;
@@ -2718,11 +2727,8 @@ button:focus-visible, a:focus-visible {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   .nav-segmented-control {
-    display: none;
-  }
-  .nav-status-chip {
     display: none;
   }
   .nav-btn-resume {
@@ -2730,16 +2736,28 @@ button:focus-visible, a:focus-visible {
   }
   .mobile-nav-toggle {
     display: flex;
+    min-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-container {
+    padding: 64px 0;
   }
   .hero-banner-section {
-    padding: 100px 0 60px 0;
+    padding: 104px 0 56px 0;
     text-align: center;
   }
   .hero-badge-pill {
     margin: 0 auto 20px auto;
+    max-width: 100%;
+    white-space: normal;
+    text-align: center;
   }
   .hero-role-wrapper {
     justify-content: center;
+    flex-wrap: wrap;
   }
   .hero-bio-paragraph {
     margin: 0 auto 28px auto;
@@ -2749,24 +2767,32 @@ button:focus-visible, a:focus-visible {
   }
   .hero-stack-preview {
     justify-content: center;
-    margin-bottom: 40px;
+    margin-bottom: 0;
   }
-  .hero-astronaut-img {
-    max-width: 280px;
-    margin: 0 auto;
-    display: block; /* KEEP ASTRONAUT VISIBLE ON MOBILE */
-  }
-  .astronaut-ambient-glow {
-    width: 260px;
-    height: 260px;
-  }
-  .astronaut-floating-badge {
-    left: 50%;
-    transform: translateX(-50%);
-    bottom: -10px;
+  .stack-chips-row {
+    justify-content: center;
   }
   .section-main-heading {
     font-size: 32px;
+  }
+  .project-filter-bar,
+  .experience-category-tabs {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .filter-tab-btn,
+  .exp-tab-btn {
+    min-height: 44px;
+  }
+  .card-mode-tabs {
+    flex-wrap: wrap;
+  }
+  .card-tab-btn {
+    min-height: 44px;
+  }
+  .ecosystem-skill-item {
+    flex-wrap: wrap;
+    gap: 8px;
   }
   .dossier-card-top {
     flex-direction: column;
@@ -2774,6 +2800,14 @@ button:focus-visible, a:focus-visible {
   }
   .dossier-badges-group {
     flex-wrap: wrap;
+  }
+  .github-heatmap-panel,
+  .github-activity-panel,
+  .github-lang-panel {
+    padding: 16px;
+  }
+  .github-activity-bar {
+    display: none;
   }
   .social-links-grid {
     grid-template-columns: 1fr;
@@ -2791,13 +2825,35 @@ button:focus-visible, a:focus-visible {
     flex-direction: column;
     align-items: flex-start;
   }
-  .about-highlights-grid,
-  .github-stats-grid {
+  .about-highlights-grid {
     grid-template-columns: 1fr;
+  }
+  .github-stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+  }
+  .github-stat-card {
+    padding: 14px 16px;
+    gap: 6px;
+  }
+  .github-stat-value {
+    font-size: 22px;
+  }
+  .github-stat-label {
+    font-size: 12px;
   }
 }
 
 @media (max-width: 480px) {
+  .macos-navbar-container {
+    padding: 10px 12px;
+  }
+  .nav-brand-name {
+    font-size: 14px;
+  }
+  .nav-social-btn {
+    display: none;
+  }
   .hero-main-title {
     font-size: 34px;
   }
@@ -2807,11 +2863,22 @@ button:focus-visible, a:focus-visible {
   .hero-bio-paragraph {
     font-size: 15px;
   }
-  .btn-hero-primary, .btn-hero-secondary {
+  .btn-hero-primary,
+  .btn-hero-secondary,
+  .footer-cta-actions,
+  .footer-cta-actions .btn-hero-primary,
+  .footer-cta-actions .btn-hero-secondary {
     width: 100%;
     justify-content: center;
   }
-  .polymorphic-card {
+  .polymorphic-card,
+  .timeline-dossier-card,
+  .ecosystem-category-card {
     min-height: auto;
+    min-width: 0;
+  }
+  .timeline-dossier-card,
+  .ecosystem-category-card {
+    padding: 18px;
   }
 }
