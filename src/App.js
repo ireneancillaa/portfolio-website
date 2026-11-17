@@ -4,6 +4,7 @@ import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { NavBar } from './components/navbar'
 import { Home } from './pages/Home'
+import { AboutPage } from './pages/AboutPage'
 import { ProjectsPage } from './pages/ProjectsPage'
 import { ExperiencePage } from './pages/ExperiencePage'
 import { Footer } from './components/footer'
@@ -13,6 +14,33 @@ import { ConnectModal } from './components/ConnectModal'
 function App() {
   const [isConnectOpen, setIsConnectOpen] = useState(false)
   const spotlightRef = useRef(null)
+  const progressRef = useRef(null)
+
+  useEffect(() => {
+    let scrollRaf = null
+    const updateProgress = () => {
+      scrollRaf = null
+      if (!progressRef.current) return
+      const doc = document.documentElement
+      const maxScroll = doc.scrollHeight - window.innerHeight
+      const ratio = maxScroll > 0 ? Math.min(window.scrollY / maxScroll, 1) : 0
+      progressRef.current.style.transform = `scaleX(${ratio})`
+    }
+
+    const handleScroll = () => {
+      if (!scrollRaf) {
+        scrollRaf = window.requestAnimationFrame(updateProgress)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    updateProgress()
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (scrollRaf) window.cancelAnimationFrame(scrollRaf)
+    }
+  }, [])
 
   useEffect(() => {
     const isFinePointer = window.matchMedia('(pointer: fine)').matches
@@ -66,12 +94,14 @@ function App() {
   return (
     <Router>
       <div className="App">
+        <div ref={progressRef} className="scroll-progress-bar" aria-hidden="true" />
         <div ref={spotlightRef} className="cursor-spotlight" aria-hidden="true" />
         <ScrollToTop />
         <NavBar onOpenConnect={handleOpenConnect} />
         <main>
           <Routes>
             <Route path="/" element={<Home onOpenConnect={handleOpenConnect} />} />
+            <Route path="/about" element={<AboutPage />} />
             <Route path="/projects" element={<ProjectsPage onOpenConnect={handleOpenConnect} />} />
             <Route path="/experience" element={<ExperiencePage onOpenConnect={handleOpenConnect} />} />
           </Routes>

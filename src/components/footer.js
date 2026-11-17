@@ -69,6 +69,9 @@ export const Footer = ({ onOpenConnect }) => {
                 <Link to="/" className="footer-nav-link" onClick={scrollToTop}>Overview</Link>
               </li>
               <li>
+                <Link to="/about" className="footer-nav-link" onClick={scrollToTop}>About</Link>
+              </li>
+              <li>
                 <Link to="/projects" className="footer-nav-link" onClick={scrollToTop}>Projects</Link>
               </li>
               <li>

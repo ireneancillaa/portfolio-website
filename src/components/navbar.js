@@ -18,7 +18,7 @@ export const NavBar = ({ onOpenConnect }) => {
 
       // Active section spy when on homepage
       if (location.pathname === '/') {
-        const sections = ['home', 'projects', 'experience', 'skills']
+        const sections = ['home', 'about', 'projects', 'experience', 'skills']
         const scrollPosition = window.scrollY + 200
 
         for (const sectionId of sections) {
@@ -40,7 +40,9 @@ export const NavBar = ({ onOpenConnect }) => {
   }, [location])
 
   useEffect(() => {
-    if (location.pathname === '/projects') {
+    if (location.pathname === '/about') {
+      setActiveSection('about')
+    } else if (location.pathname === '/projects') {
       setActiveSection('projects')
     } else if (location.pathname === '/experience') {
       setActiveSection('experience')
@@ -99,6 +101,18 @@ export const NavBar = ({ onOpenConnect }) => {
               onClick={() => handleNavClick('home', '/')}
             >
               Overview
+            </button>
+            <button
+              type="button"
+              role="tab"
+              aria-selected={activeSection === 'about'}
+              className={`segmented-pill-btn ${activeSection === 'about' ? 'active' : ''}`}
+              onClick={() => {
+                setIsMobileMenuOpen(false)
+                navigate('/about')
+              }}
+            >
+              About
             </button>
             <button
               type="button"
@@ -219,6 +233,16 @@ export const NavBar = ({ onOpenConnect }) => {
             onClick={() => handleNavClick('home', '/')}
           >
             Overview
+          </button>
+          <button
+            type="button"
+            className={`drawer-nav-item ${activeSection === 'about' ? 'active' : ''}`}
+            onClick={() => {
+              setIsMobileMenuOpen(false)
+              navigate('/about')
+            }}
+          >
+            About
           </button>
           <button
             type="button"
