@@ -4,9 +4,9 @@ import github from '../assets/img/github.svg'
 import linkedin from '../assets/img/linkedin.svg'
 import instagram from '../assets/img/instagram.svg'
 import discord from '../assets/img/discord.svg'
-import cv from '../assets/file/Irene Ancilla Chow-resume.pdf'
 
 export const ConnectModal = ({ isOpen, onClose }) => {
+  const resumePageUrl = `${process.env.PUBLIC_URL || ''}/resume.html`
   const [copied, setCopied] = useState(false)
   const email = 'ireneancilla@gmail.com'
 
@@ -150,7 +150,7 @@ export const ConnectModal = ({ isOpen, onClose }) => {
           <div className="mac-modal-footer">
             <span className="footer-note">Looking for formal credentials?</span>
             <a
-              href={cv}
+              href={resumePageUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="resume-pill-link"

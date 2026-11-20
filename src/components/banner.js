@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import { FiSmartphone } from 'react-icons/fi'
 import headerImg from '../assets/img/header-img.svg'
-import cv from '../assets/file/Irene Ancilla Chow-resume.pdf'
 
 export const Banner = ({ onOpenConnect }) => {
+  const resumePageUrl = `${process.env.PUBLIC_URL || ''}/resume.html`
   const [loopNum, setLoopNum] = useState(0)
   const [isDeleting, setIsDeleting] = useState(false)
   const toRotate = ['iOS & Mobile Developer', 'Front-End Web Engineer', 'UI/UX Designer']
@@ -89,7 +89,7 @@ export const Banner = ({ onOpenConnect }) => {
               </button>
 
               <a
-                href={cv}
+                href={resumePageUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-hero-secondary"

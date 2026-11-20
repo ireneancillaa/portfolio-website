@@ -3,9 +3,9 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { Links } from './links'
 import github from '../assets/img/github.svg'
 import linkedin from '../assets/img/linkedin.svg'
-import cv from '../assets/file/Irene Ancilla Chow-resume.pdf'
 
 export const NavBar = ({ onOpenConnect }) => {
+  const resumePageUrl = `${process.env.PUBLIC_URL || ''}/resume.html`
   const [activeSection, setActiveSection] = useState('home')
   const [scrolled, setScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -165,11 +165,11 @@ export const NavBar = ({ onOpenConnect }) => {
             </a>
 
             <a
-              href={cv}
+              href={resumePageUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="nav-btn-resume"
-              aria-label="View Resume PDF"
+              aria-label="View Resume PDF in new tab"
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
@@ -269,11 +269,12 @@ export const NavBar = ({ onOpenConnect }) => {
 
         <div className="drawer-footer-actions">
           <a
-            href={cv}
+            href={resumePageUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-hero-secondary"
             style={{ width: '100%', justifyContent: 'center' }}
+            onClick={() => setIsMobileMenuOpen(false)}
           >
             View Resume (PDF)
           </a>

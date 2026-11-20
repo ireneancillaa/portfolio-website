@@ -3,13 +3,13 @@ import { Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { FiArrowUp, FiMail, FiMapPin, FiFileText } from 'react-icons/fi'
 import { Links } from './links'
-import cv from '../assets/file/Irene Ancilla Chow-resume.pdf'
 import github from '../assets/img/github.svg'
 import linkedin from '../assets/img/linkedin.svg'
 import instagram from '../assets/img/instagram.svg'
 import discord from '../assets/img/discord.svg'
 
 export const Footer = ({ onOpenConnect }) => {
+  const resumePageUrl = `${process.env.PUBLIC_URL || ''}/resume.html`
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
@@ -38,7 +38,7 @@ export const Footer = ({ onOpenConnect }) => {
               <span>Let&apos;s Connect</span>
             </button>
             <a
-              href={cv}
+              href={resumePageUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="btn-hero-secondary"
